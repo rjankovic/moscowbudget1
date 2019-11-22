@@ -56,66 +56,36 @@ href="https://github.com/vuetifyjs/vuetify/releases/latest" -->
 
     </v-app-bar>
     
-<v-navigation-drawer clipped="true" app v-model="drawer" color="primary" dark>
-  <p>Lorem ipsum dolor</p>
+<v-navigation-drawer clipped="true" app v-model="drawer" color="primary" dark class="pt-5">
+      
+      <span class="white--text px-4">Budgeting process</span>
+      <v-radio-group v-model="selectedProcess" class="px-4">
+      <v-radio
+        :key=-1
+        label="All processes"
+        :value=-1
+      ></v-radio>
+      <v-radio
+        v-for="n in processList"
+        :key=n.id
+        :label="`${n.name}`"
+        :value="n.id"
+      ></v-radio>
+    </v-radio-group>
+    <v-divider></v-divider>
+    <v-list>
+      <v-list-item v-for="menuItem in menu" :key="menuItem.label">
+        <v-list-item-action>
+          <v-icon>{{menuItem.icon}}</v-icon>
+        </v-list-item-action>
+        <v-list-item-contnt>{{menuItem.label}}</v-list-item-contnt>
+      </v-list-item>
+    </v-list>
 </v-navigation-drawer>
 
     <!-- </v-layout> -->
 <v-content>
 
-
-<v-spacer height="20"/>
-
-<v-container>
-<v-flex>
-        <v-card
-    width="256"
-  >
-    <v-navigation-drawer permanent>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>
-            Application
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            subtext
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
-
-      <v-list
-        dense
-        nav
-      >
-
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>
-            Application
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-        <!-- <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item> -->
-      </v-list>
-    </v-navigation-drawer>
-  </v-card>
-</v-flex>
-</v-container>
 
     
       <HelloWorld/>
@@ -134,7 +104,21 @@ export default {
   },
 
   data: () => ({
-    drawer: false
+    drawer: false,
+    processList:
+    [
+      {id: 1, name: "Budget 2020"},
+      {id: 2, name: "Budget 2021"},
+      {id: 3, name: "Budget Extra 2020"}
+    ],
+    selectedProcess: -1,
+    menu:
+    [
+      {label: "Dashboard", icon: "dashboard"},
+      {label: "Notifications", icon: "notifications"},
+      {label: "Tasks", icon: "assignment_turned_in"},
+      {label: "Documents", icon: "description"}
+    ]
   }),
 };
 </script>
