@@ -21,6 +21,8 @@ import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
 import { faFileAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+import moment from 'moment'
+
 library.add(faUserSecret)
 library.add(faUser)
 library.add(faSolarPanel)
@@ -32,8 +34,11 @@ library.add(faClipboardCheck)
 library.add(faFileAlt)
 
 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-Vue.use(VueRouter)
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.use(VueRouter);
+Vue.use(require('vue-moment'));
+Vue.prototype.moment = moment;
+
 const router = new VueRouter(
   {
     routes: [
@@ -46,7 +51,15 @@ mode: 'history'
   }
 );
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    return moment(String(value)).format('MM/DD/YYYY')
+  }
+});
+
+// Vue.prototype.$log = console.log;
 
 new Vue({
   vuetify,

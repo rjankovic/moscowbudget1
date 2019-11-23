@@ -4,141 +4,150 @@
       text-center
       wrap
     >
-      <v-flex xs12>
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        ></v-img>
-      </v-flex>
-
       <v-flex mb-4>
         <h1 class="display-2 font-weight-bold mb-3">
           Notifications
         </h1>
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a href="https://community.vuetifyjs.com" target="_blank">Discord Community</a>
-        </p>
+        
       </v-flex>
 
-      <v-flex
-        mb-5
-        xs12
-      >
-        <h2 class="headline font-weight-bold mb-3">What's next?</h2>
-
-        <v-layout justify-center>
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-layout>
-      </v-flex>
-
-      <v-flex
-        xs12
-        mb-5
-      >
-        <h2 class="headline font-weight-bold mb-3">Important Links</h2>
-
-        <v-layout justify-center>
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-layout>
-      </v-flex>
-
-      <v-flex
-        xs12
-        mb-5
-      >
-        <h2 class="headline font-weight-bold mb-3">Ecosystem</h2>
-
-        <v-layout justify-center>
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-layout>
-      </v-flex>
     </v-layout>
+
+    <v-data-table
+      :headers="headers"
+      :items="notifications"
+            :single-expand="singleExpand"
+      :expanded.sync="expanded"
+      item-key="id"
+      show-expand
+      class="elevation-1"
+    >
+    <!-- sort-by="date" -->
+      <!-- <template v-slot:top>
+        <v-toolbar flat color="white">
+          <v-toolbar-title>Notifications</v-toolbar-title>
+          <v-divider
+            class="mx-4"
+            inset
+            vertical
+          ></v-divider>
+          <v-spacer></v-spacer>
+          <v-dialog v-model="dialog" max-width="500px">
+            <template v-slot:activator="{ on }">
+              <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+            </template>
+            <v-card>
+              <v-card-title>
+                <span class="headline">{{ formTitle }}</span>
+              </v-card-title>
+  
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+  
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-toolbar>
+      </template> -->
+      <template v-slot:item.action="{ item }">
+        <v-icon
+          class="mr-2"
+          @click="goToItem(item)"
+        >
+          exit_to_app
+        </v-icon>
+      </template>
+      <template v-slot:expanded-item="{ item }">
+        <td class="primary lighten-4" :colspan="headers.length">{{item.details}}}</td>
+      </template>
+         <template
+            v-slot:item.dateFormatted="{ item }" >
+    {{ item.date | formatDate }}
+  </template>
+      <!-- <template v-slot:no-data>
+        <v-btn color="primary" @click="initialize">Reset</v-btn>
+      </template> -->
+    </v-data-table>
   </v-container>
 </template>
 
 <script>
+// import moment from 'moment'
 export default {
   name: 'Notifications',
 
-  data: () => ({
-    ecosystem: [
-      {
-        text: 'vuetify-loader',
-        href: 'https://github.com/vuetifyjs/vuetify-loader',
-      },
-      {
-        text: 'github',
-        href: 'https://github.com/vuetifyjs/vuetify',
-      },
-      {
-        text: 'awesome-vuetify',
-        href: 'https://github.com/vuetifyjs/awesome-vuetify',
-      },
-    ],
-    importantLinks: [
-      {
-        text: 'Documentation',
-        href: 'https://vuetifyjs.com',
-      },
-      {
-        text: 'Chat',
-        href: 'https://community.vuetifyjs.com',
-      },
-      {
-        text: 'Made with Vuetify',
-        href: 'https://madewithvuejs.com/vuetify',
-      },
-      {
-        text: 'Twitter',
-        href: 'https://twitter.com/vuetifyjs',
-      },
-      {
-        text: 'Articles',
-        href: 'https://medium.com/vuetify',
-      },
-    ],
-    whatsNext: [
-      {
-        text: 'Explore components',
-        href: 'https://vuetifyjs.com/components/api-explorer',
-      },
-      {
-        text: 'Select a layout',
-        href: 'https://vuetifyjs.com/layout/pre-defined',
-      },
-      {
-        text: 'Frequently Asked Questions',
-        href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
-      },
-    ],
-  }),
+  data () {
+    return {
+      expanded: [],
+      singleExpand: false,
+      headers: [
+        { text: 'Name', value: 'name', sortable: false },
+        { text: 'Date', value: 'dateFormatted', sortable: false },
+        { text: 'Details', value: 'data-table-expand', sortable: false },
+        { text: 'Go to detail', value: 'action', sortable: false },
+      ],
+      notifications: [
+        {
+          id: 1,
+          name: 'New document for approval',
+          route: '/docs/1234',
+          date: new Date(), // new Date("2019-11-30"),
+          details: 'Document ABC has been submitted by XYZ and ready for your approval',
+        },
+        {
+          id: 2,
+          name: 'Task Save Universe due in 7 days',
+          route: '/taks/1234',
+          date: new Date("2019-11-29"),
+          details: 'You need to finish Save Universe in 7 days',
+        },
+        {
+          id: 3,
+          name: 'Document World Domination Plan approved',
+          route: '/docs/12345',
+          date: new Date("2019-11-28"),
+          details: 'The Illuminati has approved your World Dominatino Plan',
+        },
+
+      ],
+    }
+  },
+  methods: {
+goToItem (item) {
+      window.console.log("goto");
+      window.console.log(item);
+    },
+    // frontEndDateFormat: function(date) {
+    //   var date2 = date;
+    //   var x = moment(date, 'YYYY-MM-DD').format('DD.MM.YYYY');
+    //   x = date2;
+    //   date2 = x;
+    //   return "AAAAA"; // moment(date, 'YYYY-MM-DD').format('DD.MM.YYYY');
+    //   },
+
+  }
 };
 </script>
