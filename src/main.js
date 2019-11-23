@@ -23,6 +23,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import moment from 'moment'
 
+import msal from 'vue-msal'
+
 library.add(faUserSecret)
 library.add(faUser)
 library.add(faSolarPanel)
@@ -60,9 +62,26 @@ Vue.filter('formatDate', function(value) {
 });
 
 // Vue.prototype.$log = console.log;
+ 
+Vue.use(msal, {
+    auth: {
+      clientId: '45bee137-c643-4667-adbd-7d1adb27fb76', // application ID
+      //redirectUri: 'https://login.live.com/oauth20_desktop.srf' // MSAL 2
+      redirectUri: 'http://localhost:8080/' // localhost redirect URI
+      
+      //redirectUri: 'msal45bee137-c643-4667-adbd-7d1adb27fb76://auth' // MSAL redirect URI
+      //redirectUri: '45bee137-c643-4667-adbd-7d1adb27fb76' // localhost redirect URI
+      
+    }
+});
 
 new Vue({
   vuetify,
   router,
-  render: h => h(App)
+  render: h => h(App),
+  created() {
+    if (!this.$msal.isAuthenticated()) {
+        this.$msal.signIn();
+    }
+  }
 }).$mount('#app')
