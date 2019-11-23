@@ -1,6 +1,13 @@
 import Vue from 'vue'
-import App from './App.vue'
+
+import App from './App.vue';
+import Dashboard from './components/Dashboard';
+import Notifications from './components/Notifications';
+import Tasks from './components/Tasks';
+import Documents from './components/Documents';
+
 import vuetify from './plugins/vuetify';
+import VueRouter from 'vue-router'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
@@ -26,10 +33,23 @@ library.add(faFileAlt)
 
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.use(VueRouter)
+const router = new VueRouter(
+  {
+    routes: [
+      {path: "/", component: Dashboard},
+      {path: "/notifications", component: Notifications},
+      {path: "/tasks", component: Tasks},
+      {path: "/docs", component: Documents}
+    ],
+mode: 'history'
+  }
+);
 
 Vue.config.productionTip = false
 
 new Vue({
   vuetify,
+  router,
   render: h => h(App)
 }).$mount('#app')
