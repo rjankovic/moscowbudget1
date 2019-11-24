@@ -72,16 +72,42 @@ Vue.use(msal, {
       //redirectUri: 'msal45bee137-c643-4667-adbd-7d1adb27fb76://auth' // MSAL redirect URI
       //redirectUri: '45bee137-c643-4667-adbd-7d1adb27fb76' // localhost redirect URI
       
+    },
+    request: {
+      scopes: ['45bee137-c643-4667-adbd-7d1adb27fb76']
     }
 });
+
+
+// import AuthService from './services/auth.service'
+
+
+
+// Vue.prototype.$X = 'Y';
+// const authService = new AuthService();
+// Vue.prototype.$AuthService = authService;
+// window.console.log('service');
+// window.console.log(authService);
+
+
+//Vue.prototype.$token = msal
 
 new Vue({
   vuetify,
   router,
+  msal,
   render: h => h(App),
   created() {
     if (!this.$msal.isAuthenticated()) {
         this.$msal.signIn();
     }
+    else
+    {
+      window.console.log('msal:');
+      window.console.log(this.$msal);
+    }
+  },
+  components: {
+    app: App
   }
 }).$mount('#app')
