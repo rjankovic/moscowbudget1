@@ -1,6 +1,7 @@
 import Vue from 'vue'
-
 import App from './App.vue';
+import store from './store';
+
 import Dashboard from './components/Dashboard';
 import Notifications from './components/Notifications';
 import Tasks from './components/Tasks';
@@ -93,19 +94,20 @@ Vue.use(msal, {
 //Vue.prototype.$token = msal
 
 new Vue({
+  store,
   vuetify,
   router,
   msal,
   render: h => h(App),
   created() {
-    if (!this.$msal.isAuthenticated()) {
-        this.$msal.signIn();
-    }
-    else
-    {
-      window.console.log('msal:');
-      window.console.log(this.$msal);
-    }
+    // if (!this.$msal.isAuthenticated()) {
+    //     this.$msal.signIn();
+    // }
+    // else
+    // {
+    //   window.console.log('msal:');
+    //   window.console.log(this.$msal);
+    // }
   },
   components: {
     app: App

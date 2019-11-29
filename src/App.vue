@@ -77,19 +77,7 @@ export default {
 
 
 
-      fetch("https://localhost:44302/api/User", {
-          method: "GET",
-          headers: {
-            'Authorization': "Bearer " + token
-          }
-        })
-          .then(response => response.json())
-          .then(data => {
-            window.console.log("user:");
-            window.console.log(data);
-          });
-
-      // fetch("https://localhost:44302/api/TodoList", {
+      // fetch("https://localhost:44302/api/User", {
       //     method: "GET",
       //     headers: {
       //       'Authorization': "Bearer " + token
@@ -97,52 +85,16 @@ export default {
       //   })
       //     .then(response => response.json())
       //     .then(data => {
-      //       window.console.log("response:");
+      //       window.console.log("user:");
       //       window.console.log(data);
       //     });
 
       } );
     
 
-    // var authService = new AuthService();
-    // authService.loginPopup();
-    // var token = authService.getGraphToken();
-    // window.console.log(token);
-    
-    //var token = this.$AuthService.getGraphToken();
-    //window.console.log(token);
-    
-
-    // this.loginFailed = false;
-    //   this.authService.login().then(
-    //     user => {
-    //       if (user) {
-    //         this.user = user;
-    //       } else {
-    //         this.loginFailed = true;
-    //       }
-    //     },
-    //     () => {
-    //       this.loginFailed = true;
-    //     }
-    //   )
   },
   methods: {
-    // login() {
-    //   this.loginFailed = false;
-    //   this.authService.login().then(
-    //     user => {
-    //       if (user) {
-    //         this.user = user;
-    //       } else {
-    //         this.loginFailed = true;
-    //       }
-    //     },
-    //     () => {
-    //       this.loginFailed = true;
-    //     }
-    //   )
-    // }
+
   }
 }
 </script>
