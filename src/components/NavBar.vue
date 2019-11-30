@@ -32,8 +32,8 @@
             ></v-text-field>
           </template>
           <v-date-picker v-model="date" @input="menu2 = false"
-          min="2019-01-01"
-          max="2019-06-15"
+          min="2020-01-01"
+          max="2020-06-15"
           ></v-date-picker>
         </v-menu>
 
@@ -86,19 +86,19 @@ offset-y
     </v-menu>
 <!-- @click="" -->
 
-      <v-btn
+      <!-- <v-btn
         
         target="_blank"
         text
       >
         <span>Logout</span>
-      </v-btn>
+      </v-btn> -->
 
     </v-app-bar>
     
 <v-navigation-drawer clipped="true" app v-model="drawer" color="primary" dark class="pt-5">
       
-      <span class="white--text px-4">Budgeting process</span>
+      <!-- <span class="white--text px-4">Budgeting process</span>
       <v-radio-group v-model="selectedProcess" class="px-4">
       <v-radio
         :key=-1
@@ -112,7 +112,7 @@ offset-y
         :value="n.id"
       ></v-radio>
     </v-radio-group>
-    <v-divider></v-divider>
+    <v-divider></v-divider> -->
     <v-list>
       <v-list-item v-for="menuItem in menu" :key="menuItem.label" router :to="menuItem.route">
         <v-list-item-action>
@@ -179,7 +179,7 @@ export default {
       //],
       // selectedUser: {title: "The government of Moscow", code: "Government"},
 
-          date: '2019-01-01', //new Date().toISOString().substr(0, 10),
+          date: '2020-01-01', //new Date().toISOString().substr(0, 10),
     modal: false,
     menu2: false,
   }),

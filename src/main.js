@@ -46,7 +46,7 @@ Vue.prototype.moment = moment;
 const router = new VueRouter(
   {
     routes: [
-      {path: "/dashboard", component: Intro},
+      {path: "/", component: Intro},
       {path: "/dashboard", component: Dashboard},
       {path: "/notifications", component: Notifications},
       {path: "/tasks", component: Tasks},
