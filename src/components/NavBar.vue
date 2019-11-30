@@ -24,14 +24,16 @@
         >
           <template v-slot:activator="{ on }">
             <v-text-field
-              v-model="date"
+              v-model="currentDate"
               prepend-icon="event"
               readonly
               v-on="on"
               width="100px"
             ></v-text-field>
           </template>
-          <v-date-picker v-model="date" @input="menu2 = false"
+          <!-- v-model="currentDate" @input="menu2 = false" -->
+          <!-- :value="$store.state.currentDate" -->
+          <v-date-picker v-model="currentDate" @input="changeDate($event)"
           min="2020-01-01"
           max="2020-06-15"
           ></v-date-picker>
@@ -179,14 +181,14 @@ export default {
       //],
       // selectedUser: {title: "The government of Moscow", code: "Government"},
 
-          date: '2020-01-01', //new Date().toISOString().substr(0, 10),
+          /*date: '2020-01-01',*/ //new Date().toISOString().substr(0, 10),
     modal: false,
     menu2: false,
   }),
 
   methods:
   {
-    ...mapActions(["setCurrentUser"]),
+    ...mapActions(["setCurrentUser", "setCurrentDate"]),
   boardSwitch (firstArg, secondArg, value) {
         
         //window.console.log(value);
@@ -196,9 +198,18 @@ export default {
         //setCurrentUser(value);
         window.console.log(value);
 store.dispatch('setCurrentUser', {newCurrentUser: value});
+    },
+
+    changeDate (value) {
+        
+        window.console.log(value);
+        this.menu2 = false;
+        store.dispatch('setCurrentDate', {newCurrentDate: value});
+        
+//store.dispatch('setCurrentUser', {newCurrentUser: value});
     }
   },
 
-  computed: mapGetters(["allUsers", "currentUser"]),
+  computed: mapGetters(["allUsers", "currentUser", "currentDate"]),
 };
 </script>

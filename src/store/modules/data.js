@@ -1,7 +1,8 @@
 
 const state = {
   currentUser: {title: "The government of Moscow", code: "Government"},
-  
+  currentDate: "2020-01-01",
+
   users: [
     {id: 1, title: "The government of Moscow", code: "Government"},
     {id: 2, title: "Moscow Department of Finance", code: "Finance"},
@@ -32,6 +33,7 @@ const state = {
   tasks:
   [
     // 1a
+    // originator, recipient
     {id: 1, name: "Task 1", 
     description: "Provides a list of indicators of the socio-economic development of the city of Moscow used by the chief administrators of the budget revenues of the city of Moscow and the chief administrators of the sources of financing the budget deficit of the city of Moscow when forecasting revenues in accordance with their approved methods for forecasting the revenue of the budget of the city of Moscow and the sources of financing the budget deficit of the city of Moscow", 
     status: 1, procesPeriodId: 1, year: 2019, authority: 3, assignedTo: 2},
@@ -150,7 +152,8 @@ b.	From September 25 to October 1 of the current financial year
 
 const getters = {
   allUsers: state => state.users,
-  currentUser: state => state.currentUser
+  currentUser: state => state.currentUser,
+  currentDate: state => state.currentDate
 };
 
 const actions = {
@@ -166,6 +169,10 @@ const actions = {
     window.console.log('new current user 1'); window.console.log(user);
 
     commit('setCurrentUser', user.newCurrentUser);
+  },
+  async setCurrentDate({ commit }, date) {
+    
+    commit('setCurrentDate', date.newCurrentDate);
   },
 //   async deleteTodo({ commit }, id) {
 //     await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
@@ -199,6 +206,7 @@ const actions = {
 const mutations = {
   setCurrentUser: (state, newCurrentUser) => {window.console.log('new current user'); window.console.log(newCurrentUser); 
   state.currentUser = newCurrentUser},
+  setCurrentDate: (state, newCurrentDate) => {state.currentDate = newCurrentDate},
   // newTodo: (state, todo) => state.todos.unshift(todo),
   // removeTodo: (state, id) =>
   //   (state.todos = state.todos.filter(todo => todo.id !== id)),
