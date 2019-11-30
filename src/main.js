@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue';
 import store from './store';
 
+import Intro from './components/Intro';
 import Dashboard from './components/Dashboard';
 import Notifications from './components/Notifications';
 import Tasks from './components/Tasks';
@@ -45,7 +46,8 @@ Vue.prototype.moment = moment;
 const router = new VueRouter(
   {
     routes: [
-      {path: "/", component: Dashboard},
+      {path: "/dashboard", component: Intro},
+      {path: "/dashboard", component: Dashboard},
       {path: "/notifications", component: Notifications},
       {path: "/tasks", component: Tasks},
       {path: "/docs", component: Documents}

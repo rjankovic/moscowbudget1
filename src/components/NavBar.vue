@@ -9,8 +9,11 @@
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
   
         <v-toolbar-title>Moscow Budgeting 2020</v-toolbar-title>
-  
-        <v-spacer></v-spacer>
+<v-spacer></v-spacer>
+<!-- <span class="mr-2">
+        Choose "today"
+      </span>   -->
+        
 
 <v-menu
           v-model="menu2"
@@ -28,7 +31,10 @@
               width="100px"
             ></v-text-field>
           </template>
-          <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
+          <v-date-picker v-model="date" @input="menu2 = false"
+          min="2019-01-01"
+          max="2019-06-15"
+          ></v-date-picker>
         </v-menu>
 
 <v-spacer></v-spacer>
@@ -74,7 +80,7 @@ offset-y
           :key="index"
           @click="boardSwitch('shoPFIB', index, item)"
         >
-          <v-list-item-title>{{ item.code }}</v-list-item-title>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -137,7 +143,7 @@ export default {
     selectedProcess: -1,
     menu:
     [
-      {label: "Dashboard", icon: "dashboard", route: "/"},
+      {label: "Dashboard", icon: "dashboard", route: "/dashboard"},
       {label: "Notifications", icon: "notifications", route: "/notifications"},
       {label: "Tasks", icon: "assignment_turned_in", route: "/tasks"},
       {label: "Documents", icon: "description", route: "/docs"}
@@ -173,7 +179,7 @@ export default {
       //],
       // selectedUser: {title: "The government of Moscow", code: "Government"},
 
-          date: new Date().toISOString().substr(0, 10),
+          date: '2019-01-01', //new Date().toISOString().substr(0, 10),
     modal: false,
     menu2: false,
   }),
